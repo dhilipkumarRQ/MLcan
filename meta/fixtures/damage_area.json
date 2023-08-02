@@ -1,0 +1,65 @@
+[
+    {
+        "model": "meta.damage_area",
+        "pk": 1,
+        "fields": {
+            "area": "AAA"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 2,
+        "fields": {
+            "area": "BBB"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 3,
+        "fields": {
+            "area": "CCC"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 4,
+        "fields": {
+            "area": "DDD"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 5,
+        "fields": {
+            "area": "EEE"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 6,
+        "fields": {
+            "area": "FFF"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 7,
+        "fields": {
+            "area": "GGG"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 8,
+        "fields": {
+            "area": "HHH"
+        }
+    },
+    {
+        "model": "meta.damage_area",
+        "pk": 9,
+        "fields": {
+            "area": "III"
+        }
+    }
+]

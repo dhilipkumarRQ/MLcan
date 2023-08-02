@@ -1,0 +1,30 @@
+[
+    {
+        "model": "meta.city",
+        "pk": 1,
+        "fields": {
+            "city": "chennai"
+        }
+    },
+    {
+        "model": "meta.city",
+        "pk": 2,
+        "fields": {
+            "city": "bangalore"
+        }
+    },
+    {
+        "model": "meta.city",
+        "pk": 3,
+        "fields": {
+            "city": "mumbai"
+        }
+    },
+    {
+        "model": "meta.city",
+        "pk": 4,
+        "fields": {
+            "city": "delhi"
+        }
+    }
+]

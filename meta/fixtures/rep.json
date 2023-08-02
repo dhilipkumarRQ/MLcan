@@ -1,0 +1,66 @@
+[
+    {
+        "model": "meta.rep",
+        "pk": 1,
+        "fields": {
+            "rep": "AAA"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 2,
+        "fields": {
+            "rep": "BBB"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 3,
+        "fields": {
+            "rep": "CCC"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 4,
+        "fields": {
+            "rep": "DDD"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 5,
+        "fields": {
+            "rep": "EEE"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 6,
+        "fields": {
+            "rep": "FFF"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 7,
+        "fields": {
+            "rep": "GGG"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 8,
+        "fields": {
+            "rep": "HHH"
+        }
+    },
+    {
+        "model": "meta.rep",
+        "pk": 9,
+        "fields": {
+            "rep": "III"
+        }
+    }
+    
+]

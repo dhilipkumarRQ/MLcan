@@ -1,0 +1,30 @@
+[
+    {
+        "model": "meta.province",
+        "pk": 1,
+        "fields": {
+            "province": "tamilnadu"
+        }
+    },
+    {
+        "model": "meta.province",
+        "pk": 2,
+        "fields": {
+            "province": "kerala"
+        }
+    },
+    {
+        "model": "meta.province",
+        "pk": 3,
+        "fields": {
+            "province": "andhra"
+        }
+    },
+    {
+        "model": "meta.province",
+        "pk": 4,
+        "fields": {
+            "province": "karnataka"
+        }
+    }
+]

@@ -1,0 +1,170 @@
+[
+    {
+        "model": "meta.container_year",
+        "pk": 1,
+        "fields": {
+            "year": 2000
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 2,
+        "fields": {
+            "year": 2001
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 3,
+        "fields": {
+            "year": 2002
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 4,
+        "fields": {
+            "year": 2003
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 5,
+        "fields": {
+            "year": 2004
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 6,
+        "fields": {
+            "year": 2005
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 7,
+        "fields": {
+            "year": 2006
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 8,
+        "fields": {
+            "year": 2007
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 9,
+        "fields": {
+            "year": 2008
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 10,
+        "fields": {
+            "year": 2009
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 11,
+        "fields": {
+            "year": 2010
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 12,
+        "fields": {
+            "year": 2011
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 13,
+        "fields": {
+            "year": 2012
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 14,
+        "fields": {
+            "year": 2013
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 15,
+        "fields": {
+            "year": 2014
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 16,
+        "fields": {
+            "year": 2015
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 17,
+        "fields": {
+            "year": 2016
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 18,
+        "fields": {
+            "year": 2017
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 19,
+        "fields": {
+            "year": 2018
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 20,
+        "fields": {
+            "year": 2019
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 21,
+        "fields": {
+            "year": 2020
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 22,
+        "fields": {
+            "year": 2021
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 23,
+        "fields": {
+            "year": 2022
+        }
+    },
+    {
+        "model": "meta.container_year",
+        "pk": 24,
+        "fields": {
+            "year": 2023
+        }
+    }
+]

@@ -1,0 +1,66 @@
+[
+    {
+        "model": "meta.component",
+        "pk": 1,
+        "fields": {
+            "component": "AAA"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 2,
+        "fields": {
+            "component": "BBB"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 3,
+        "fields": {
+            "component": "CCC"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 4,
+        "fields": {
+            "component": "DDD"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 5,
+        "fields": {
+            "component": "EEE"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 6,
+        "fields": {
+            "component": "FFF"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 7,
+        "fields": {
+            "component": "GGG"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 8,
+        "fields": {
+            "component": "HHH"
+        }
+    },
+    {
+        "model": "meta.component",
+        "pk": 9,
+        "fields": {
+            "component": "III"
+        }
+    }
+    
+]

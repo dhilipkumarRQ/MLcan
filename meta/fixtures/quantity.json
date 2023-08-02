@@ -1,0 +1,51 @@
+[
+    {
+        "model": "meta.quantity",
+        "pk": 1,
+        "fields": {
+            "quantity": 10
+        }
+    },
+    {
+        "model": "meta.quantity",
+        "pk": 2,
+        "fields": {
+            "quantity": 20
+        }
+    },
+    {
+        "model": "meta.quantity",
+        "pk": 3,
+        "fields": {
+            "quantity": 30
+        }
+    },
+    {
+        "model": "meta.quantity",
+        "pk": 4,
+        "fields": {
+            "quantity": 40
+        }
+    },
+    {
+        "model": "meta.quantity",
+        "pk": 5,
+        "fields": {
+            "quantity": 50
+        }
+    },
+    {
+        "model": "meta.quantity",
+        "pk": 6,
+        "fields": {
+            "quantity": 60
+        }
+    },
+    {
+        "model": "meta.quantity",
+        "pk": 7,
+        "fields": {
+            "quantity": 70
+        }
+    }
+]

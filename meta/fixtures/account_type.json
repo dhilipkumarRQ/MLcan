@@ -1,0 +1,16 @@
+[
+    {
+        "model": "meta.account_type",
+        "pk": 1,
+        "fields": {
+            "type": "ADMIN"
+        }
+    },
+    {
+        "model": "meta.account_type",
+        "pk": 2,
+        "fields": {
+            "type": "EMPLOYEE"
+        }
+    }
+]

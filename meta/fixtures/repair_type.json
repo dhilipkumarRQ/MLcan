@@ -1,0 +1,37 @@
+[
+    {
+        "model": "meta.repair_type",
+        "pk": 1,
+        "fields": {
+            "type" : "straighten"
+        }
+    },
+    {
+        "model": "meta.repair_type",
+        "pk": 2,
+        "fields": {
+            "type" : "painting"
+        }
+    },
+    {
+        "model": "meta.repair_type",
+        "pk": 3,
+        "fields": {
+            "type" : "welding"
+        }
+    },
+    {
+        "model": "meta.repair_type",
+        "pk": 4,
+        "fields": {
+            "type" : "dent clearance"
+        }
+    },
+    {
+        "model": "meta.repair_type",
+        "pk": 5,
+        "fields": {
+            "type" : "rust clearance"
+        }
+    }
+]

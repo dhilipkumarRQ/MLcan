@@ -1,0 +1,66 @@
+[
+    {
+        "model": "meta.event",
+        "pk": 1,
+        "fields": {
+            "event": "AAA"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 2,
+        "fields": {
+            "event": "BBB"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 3,
+        "fields": {
+            "event": "CCC"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 4,
+        "fields": {
+            "event": "DDD"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 5,
+        "fields": {
+            "event": "EEE"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 6,
+        "fields": {
+            "event": "FFF"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 7,
+        "fields": {
+            "event": "GGG"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 8,
+        "fields": {
+            "event": "HHH"
+        }
+    },
+    {
+        "model": "meta.event",
+        "pk": 9,
+        "fields": {
+            "event": "III"
+        }
+    }
+    
+]

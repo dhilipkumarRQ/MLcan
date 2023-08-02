@@ -1,0 +1,50 @@
+[
+    {
+        "model": "meta.yard",
+        "pk": 1,
+        "fields" :{
+            "name": "chennai-yard",
+            "email": "chennai.yard@gmail.com",
+            "phone": "8862198975",
+            "city": 1,
+            "province": 1,
+            "pincode": 123213
+        }
+    },
+    {
+        "model": "meta.yard",
+        "pk": 2,
+        "fields" :{
+            "name": "andhra-yard",
+            "email": "andhra.yard@gmail.com",
+            "phone": "8862198977",
+            "city": 1,
+            "province": 4,
+            "pincode": 123213
+        }
+    },
+    {
+        "model": "meta.yard",
+        "pk": 3,
+        "fields" :{
+            "name": "mumbai-yard",
+            "email": "mumbai.yard@gmail.com",
+            "phone": "8862198970",
+            "city": 4,
+            "province": 4,
+            "pincode": 123213
+        }
+    },
+    {
+        "model": "meta.yard",
+        "pk": 3,
+        "fields" :{
+            "name": "kolkata-yard",
+            "email": "kolkata.yard@gmail.com",
+            "phone": "8862198970",
+            "city": 2,
+            "province": 4,
+            "pincode": 123213
+        }
+    }
+]

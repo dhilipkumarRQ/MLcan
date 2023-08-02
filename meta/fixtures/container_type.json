@@ -1,0 +1,18 @@
+[
+    {
+        "model": "meta.container_type",
+        "pk": 1,
+        "fields": {
+            "type": "maersk",
+            "inspection_cost": 150
+        }
+    },
+    {
+        "model": "meta.container_type",
+        "pk": 2,
+        "fields": {
+            "type": "non maersk",
+            "inspection_cost": 100
+        }
+    }
+]
