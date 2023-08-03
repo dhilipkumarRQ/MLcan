@@ -1,13 +1,15 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import CommentSerializer,ActivityLedgerSerializer,ActivityQuoteRepairListSerializer
+from .serializers import CommentSerializer,ActivityLedgerSerializer,ActivityQuoteRepairListSerializer,ActivityTimelineSerializer
 from rest_framework import status
 from mlcan.config import COMMENT_ORIGIN_ALLOWED, QUOTE_ACTIVITY,INSPECTION_ACTIVITY,REPAIR_ACTIVITY
 from django.http import HttpResponse
-from .models  import Activity_Ledger,Container,Activity_Quote_Repair_List
+from .models  import Activity_Ledger,Container,Activity_Quote_Repair_List,Activity_Timeline
 from mlcan.config import INSPECTION_ACTIVITY, REPAIR_ACTIVITY, QUOTE_ACTIVITY, QUOTE_STATE_ORDER, REPAIR_STATE_ORDER, INSPECTION_STATE_ORDER,READY_FOR_BILLING,BILLED,ADD_REPAIR_QUOTE,ADD_REPAIR_QUOTE_ATTACHMENTS
 from django.db.models import Q
 from django.http import QueryDict
+from django.utils import timezone
+from datetime import datetime
 
 
 
@@ -20,6 +22,9 @@ def CreateComment(request):
                     "success": False,
                 },
                 status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+    error, error_message = validate_comment_request_body(request)
+    if error:
+        return Response({'data':{},'message':error_message,'success':False}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid():
         extra_data = {
@@ -36,11 +41,12 @@ def CreateComment(request):
 def CreateActivity(request,container_id):
     if request.method == 'POST':
         request.data['container_id'] = container_id
+        error, error_message = validate_create_activity_request_body(request.data)
+        if error:
+            return Response({'data':{}, 'message': error_message, 'success': False}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+        attach_activity_timeline(request)
         activity_serialize =  ActivityLedgerSerializer(data=request.data)
         if activity_serialize.is_valid():
-            error, error_message = validate_create_activity_request_body(request.data)
-            if error:
-                return Response({'data':{}, 'message': error_message, 'success': False}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
             activity_serialize.save()
             return Response({'data':activity_serialize.data,'message':'activity created sucessfully','success':True}, status=status.HTTP_201_CREATED)
         else:
@@ -66,6 +72,12 @@ def EditStatus(request, activity_id):
         if ORDER_LIST.index(activity_obj.status)+1 == ORDER_LIST.index(request.data['status']):
             activity_obj.status = request.data['status']
             activity_obj.save()
+            timeline_obj = Activity_Timeline.objects.get(activity=activity_id, status=activity_obj.status)
+            timeline_serializer = ActivityTimelineSerializer(instance=timeline_obj,data={'status_date': datetime.now(),'completed':True},partial=True)
+            if timeline_serializer.is_valid():
+                timeline_serializer.save()
+            else:
+                return Response({'data':{},'message':timeline_serializer.errors,'success':False}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
             return Response({'data':ActivityLedgerSerializer(activity_obj).data,'message':'activity updated sucessfully','success':True}, status=status.HTTP_201_CREATED)
         else:
             return Response({'data':{},'message':"given status violates status order",'success':False}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
@@ -124,6 +136,16 @@ def Comment(request, container_id):
             all_comments.extend(c_serializer.data)            
     return Response({'data':all_comments,'message':'comments are fetched successfully','success':True}, status=status.HTTP_201_CREATED)
 
+@api_view(['GET'])
+def GetTimeLine(request, activity_id):
+    if request.method == 'GET':
+        timeline_obj = Activity_Timeline.objects.filter(activity_id=activity_id).order_by('id')
+        if timeline_obj is None:
+            return Response({'data':{},'message':'timeline is no present for this activity','success':False}, status=status.HTTP_404_NOT_FOUND)
+        serializer = ActivityTimelineSerializer(timeline_obj,many=True)
+        return Response({'data':serializer.data,'message':'timeline are fetched successfully','success':True}, status=status.HTTP_200_OK)
+
+
 def validate_create_activity_request_body(data):
     if data["activity_type"] not in [QUOTE_ACTIVITY,REPAIR_ACTIVITY,INSPECTION_ACTIVITY]:
         return [True,'activity_type is not valid']
@@ -145,3 +167,30 @@ def  modify_add_repair_quote_request_body(request):
     request.data['attachment'] = {}
     request.data['attachment']['repair_area_attachment'] = request.data['repair_area_attachment']
     request.data['attachment']['damaged_area_attachment'] = request.data['damaged_area_attachment']
+
+def validate_comment_request_body(request):
+    if request.data['comment_origin'] == COMMENT_ORIGIN_ALLOWED[0]:
+        object = Container.objects.filter(id=request.data['comment_origin_id']).first()
+        if object is None:
+            return[True, "comment_origin_id is not present in container"]
+    if request.data['comment_origin'] == COMMENT_ORIGIN_ALLOWED[1]:
+        object = Activity_Quote_Repair_List.objects.filter(id=request.data['comment_origin_id']).first()    
+        if object is None:
+            return[True, "comment_origin_id is not present in activity"]
+    return [False, None]
+
+
+def attach_activity_timeline(request):
+    attach_dict = []
+    if request.data['activity_type'] == QUOTE_ACTIVITY:
+        for state in QUOTE_STATE_ORDER:
+            attach_dict.append({'status': state, 'activity_type': QUOTE_ACTIVITY, 'completed':False})
+    if request.data['activity_type'] == REPAIR_ACTIVITY:
+        for state in REPAIR_STATE_ORDER:
+            attach_dict.append({'status': state, 'activity_type': REPAIR_ACTIVITY, 'completed':False})
+    if request.data['activity_type'] == INSPECTION_ACTIVITY:
+        for state in INSPECTION_STATE_ORDER:
+            attach_dict.append({'status': state, 'activity_type': INSPECTION_ACTIVITY, 'completed':False})
+    attach_dict[0]['status_date'] = datetime.now()
+    attach_dict[0]['completed'] = True
+    request.data['activity_timeline'] = attach_dict

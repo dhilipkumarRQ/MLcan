@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreateComment,Comment,CreateActivity,EditStatus,EditDate,AddQuoteRepair, GetActivity
+from .views import CreateComment,Comment,CreateActivity,EditStatus,EditDate,AddQuoteRepair, GetActivity,GetTimeLine
 
 urlpatterns = [
     path('create-comment/', CreateComment),
@@ -7,6 +7,7 @@ urlpatterns = [
     path('create-activity/<int:container_id>', CreateActivity),
     path('status/<int:activity_id>', EditStatus),
     path('date/<int:activity_id>', EditDate),
+    path('timeline/<int:activity_id>', GetTimeLine),
     path('<int:activity_id>/attach-repair/', AddQuoteRepair),
     path('<int:container_id>',GetActivity),
 ]

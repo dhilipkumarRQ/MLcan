@@ -27,7 +27,7 @@ def CreateRepairList(request):
     if request.method == 'GET':
         if VERSION_PARAM not in request.query_params:
             raise NotFound("incorrect url, version param missing")
-        queryset = Repair_List.objects.filter(version=request.query_params[VERSION_PARAM])
+        queryset = Repair_List.objects.filter(version=request.query_params[VERSION_PARAM], is_deleted=False)
         queryset = get_repair_list(request.query_params, queryset)
         paginator = CustomPageNumberPagination()
         result_page = paginator.paginate_queryset(queryset, request)
@@ -160,7 +160,17 @@ def BulkUpload(request):
                     }, 
                     status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-
+@api_view(['DELETE'])
+def DeleteRepairList(request, id):
+    if request.method == 'DELETE':
+        obj = Repair_List.objects.get_or_none(id=id)
+        if obj:
+            obj.is_deleted = True
+            obj.save()
+            return Response({"data": {}, "success": True, "message": "deleted successfully"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"data": {}, "success": False, "message": "repair list not found"}, status=status.HTTP_404_NOT_FOUND)
+        
 
 def validate_request_body(request):
     if 'repair_serializer_type' not in request.data['repair_list_object'].keys():

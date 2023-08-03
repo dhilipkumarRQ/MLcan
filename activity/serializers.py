@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Comment, Activity_Quote_Repair_List,Activity_Ledger, Activity_Quote_Repair_Attachment
+from .models import Comment, Activity_Quote_Repair_List,Activity_Ledger, Activity_Quote_Repair_Attachment,Activity_Timeline
 from account.models import User
 from container.models import Container
 from repairlist.models  import Repair_List
@@ -29,9 +29,9 @@ class CommentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         object = None
         if validated_data['comment_origin'] == COMMENT_ORIGIN_ALLOWED[0]:
-            object = Container.objects.get(id=validated_data['comment_origin_id'])
+            object = Container.objects.filter(id=validated_data['comment_origin_id']).first()
         else:
-            object = Activity_Quote_Repair_List.objects.get(id=validated_data['comment_origin_id'])
+            object = Activity_Quote_Repair_List.objects.filter(id=validated_data['comment_origin_id']).first()
         validated_data.pop('comment_origin')
         validated_data.pop('comment_origin_id')
         return Comment.objects.create(content_object=object,**validated_data)
@@ -63,11 +63,18 @@ class ActivityQuoteRepairListSerializer(serializers.ModelSerializer):
     #     return obj
 
 
+class ActivityTimelineSerializer(serializers.ModelSerializer):
+
+    activity = serializers.PrimaryKeyRelatedField(queryset= Activity_Ledger.objects.all(), required=False)
+    class Meta:
+        model =  Activity_Timeline
+        fields = '__all__'
 
 class ActivityLedgerSerializer(serializers.ModelSerializer):
 
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='user', write_only=True)
     container_id = serializers.PrimaryKeyRelatedField(queryset=Container.objects.all(), source = 'container', write_only=True)
+    activity_timeline = ActivityTimelineSerializer(many=True)
 
     repair_list = serializers.SerializerMethodField()
 
@@ -77,4 +84,11 @@ class ActivityLedgerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Activity_Ledger
-        fields = ['id','user_id','container_id','activity_type','activity_date','repair_list','status','modified_datetime']
+        fields = ['id','user_id','container_id','activity_type','activity_timeline','activity_date','repair_list','status','modified_datetime']
+    
+    def create(self, validated_data):
+        timelines = validated_data.pop('activity_timeline')
+        activity = Activity_Ledger.objects.create(**validated_data)
+        for timeline in timelines:
+            Activity_Timeline.objects.create(activity=activity, **timeline)
+        return activity

@@ -4,7 +4,7 @@ from customer.models import Customer
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey,GenericRelation
-
+from mlcan.managers import MyManager
 
 
 # Create your models here.
@@ -21,6 +21,7 @@ class Repair_List(models.Model):
     is_deleted = models.BooleanField(default=False)
     created_datetime = models.DateTimeField(auto_now_add=True)
     modified_datetime = models.DateTimeField(auto_now=True)
+    objects = MyManager()
 
 
 class Customer_Repair_List(models.Model):

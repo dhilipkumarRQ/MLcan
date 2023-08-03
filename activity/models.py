@@ -19,11 +19,12 @@ class Activity_Ledger(models.Model):
     modified_datetime = models.DateTimeField(auto_now=True)
 
 class Activity_Timeline(models.Model):
-    activity = models.ForeignKey(Activity_Ledger, on_delete=models.CASCADE, null=True)
-    status = models.CharField(max_length=100, null=True)
-    activity_type = models.CharField(max_length=100,null=True)
+    activity = models.ForeignKey(Activity_Ledger, on_delete=models.CASCADE, related_name='activity_timeline')
+    status = models.CharField(max_length=100)
+    status_date = models.DateTimeField(null=True)
+    activity_type = models.CharField(max_length=100)
     completed = models.BooleanField(default=False)
-    created_datetime = models.DateTimeField(auto_now_add=True, null=True)
+    created_datetime = models.DateTimeField(auto_now_add=True)
     modified_datetime = models.DateTimeField(auto_now=True)
 
 class Activity_Inspection_Attachment(models.Model):
