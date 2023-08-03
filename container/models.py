@@ -2,6 +2,7 @@ from django.db import models
 from meta.models import Yard,Container_Height, Container_Length, Container_Year, Container_Type
 from customer.models import Customer
 from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericRelation
 
 class Container(models.Model):
     yard = models.ForeignKey(Yard,on_delete=models.CASCADE)
@@ -15,7 +16,7 @@ class Container(models.Model):
     location = models.CharField(max_length=50)
     created_datetime = models.DateTimeField(auto_now_add=True)
     modified_datetime = models.DateTimeField(auto_now=timezone.now)
-
+    comments = GenericRelation('activity.Comment')
 
 class Container_Attachment(models.Model):
     container = models.ForeignKey(Container, on_delete=models.CASCADE, related_name='container_attachment')

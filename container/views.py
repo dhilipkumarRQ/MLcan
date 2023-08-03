@@ -166,5 +166,5 @@ def check_request_contains_all_photo(request):
     
 def get_all_containers(query_params, query_set):
     if 'search' in query_params:
-        return query_set.filter(Q(container_no__icontains=query_params['search']))
+        return query_set.filter(Q(container_no__icontains=query_params['search'])|Q(id__icontains=query_params['search']))
     return query_set

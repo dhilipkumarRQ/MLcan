@@ -5,6 +5,9 @@ from customer.models import Customer
 from meta.serializers import Container_Type_Serializer, Container_Height_Serializer,Yard_Serializer, Container_Length_Serializer, Container_Year_Serializer
 from customer.serializers import CustomerSerializer
 from activity.serializers import CommentSerializer
+from activity.models import Activity_Ledger
+from activity.serializers import ActivityLedgerSerializer
+from mlcan.config import ALL_ACTIVE_LIST
 
 
 class ContainerAttachmentSerializer(serializers.ModelSerializer):
@@ -31,10 +34,21 @@ class ContainerSerializer(serializers.ModelSerializer):
     manufacture_year =  Container_Year_Serializer(read_only=True)
     container_type = Container_Type_Serializer(read_only=True)
 
+    current_activity = serializers.SerializerMethodField()
+    def get_current_activity(self, obj):
+        activity_obj = Activity_Ledger.objects.filter(container_id=obj.id, status__in=ALL_ACTIVE_LIST).order_by('-activity_date').first()
+        if activity_obj is None:
+            return {
+                "activity_type": None,
+                "status": "idle"
+            }
+        activity_serializer =  ActivityLedgerSerializer(activity_obj)
+        return activity_serializer.data
+
     container_attachment = ContainerAttachmentSerializer(many=True)
     class Meta:
         model = Container
-        fields = ['id', 'yard_id',"yard",'container_no', 'customer_id',"customer",'submitter_initials', 'height_id',"height",'length_id',"length",'manufacture_year_id',"manufacture_year",'container_type_id',"container_type",'location','container_attachment']
+        fields = ['id', 'yard_id',"yard",'container_no', 'customer_id',"customer",'submitter_initials', 'height_id',"height",'length_id',"length",'manufacture_year_id',"manufacture_year",'container_type_id',"container_type",'location','container_attachment','current_activity']
 
     def create(self, validated_data):
         attachments = validated_data.pop('container_attachment')
